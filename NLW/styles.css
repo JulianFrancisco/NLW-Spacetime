@@ -1,0 +1,207 @@
+/* *{ : Feito para resertar as margens e bordas da tela */
+/* box-sizing: border-box: Garante os tamanhos de cada caixa seja respeitado */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* :root : modificações na "raiz" do site", todas as fontes ou modificações feitas aqui sao passadas para todo o restante de estilização a não ser que já tenha sido estilizado antes */
+:root {
+  font-size: 16px;
+}
+
+/* ::-webkit-scrollbar : permite renderizar e modificar a barra de rolagem (scrollbar) */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+/* ::-webkit-scrollbar-track : permite renderizar e modificar o caminho da barra de rolagem (scrollbar) */
+::-webkit-scrollbar-track {
+   background-color: #2c2c31;
+}
+
+/* ::-webkit-scrollbar-thumb : permite renderizar e modificar a barra de rolagem em si(scrollbar) */
+::-webkit-scrollbar-thumb {
+  background-color: #9e9ea0;
+}
+
+/* @keyframes : keyframe é uma forma de dar animação a imagem */
+/* @keyframes entering : início */
+@keyframes entering {
+ /* 0% { background-color: red;}
+ 30% { background-color: green;}
+ 78% { opacity: 0;}
+ 100% { opacity: 1;} */
+ from {
+  opacity: 0;
+  transform: translateY(0);
+ }
+ to {
+  opacity: 1;
+  transform: translateY(0);
+ } 
+}
+
+/* Corpo da tela */
+/* display: grid : tranforma o "body" em um display grid de linhas e colunas */
+/* grid-template-areas: "profile timeline" : divide a área em duas colunas, coluna profile e coluna timeline */
+/* grid-template-columns: 1fr 1fr : divide as colunas em espaços iguais */
+/* grid-template-rows: 100vh diz que a linha única vai ser ocupada por todo o espaço disponível para ela:  */
+body {
+  background-color: #121215;
+  color: #eaeaea;
+  font-family: "Roboto", sans-serif;
+  display: grid;
+  grid-template-areas: "profile timeline";
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 100vh;
+}
+
+nav {
+  padding: 64px;
+  /* grid-area: timeline : define é o bloco nav vai ser o bloco timeline */
+  grid-area: timeline;
+  /* overflow-y: scroll : define que apenas o bloco nav irá se mover na direção y, ou seja, verticalmente */
+  overflow-y: scroll;
+  /* animation : primeiro, definimos que o entering é uma keyframe, depois, colocamos ela na nav pra dizer que a animação que terá na nav será a partir dela */
+  animation: auto entering 0.7s ease-in-out;
+}
+
+/* display: flex : tudo fica ordenado um do lado do outro */
+/* flex-direction: column : a ordenação passa a ser um em baixo do outro */
+/* gap: diz a distancia entre os blocos da classe memory */
+/* margin-bottom: põe espaçamento na parte inferior dos blocos */
+.memory {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  text-decoration: none;
+  margin-bottom: 64px;
+}
+
+/* .memory: chama a classe específica chamada memory */
+/* .memory small: chama a classe específica chamada memory e a tag small que esta dentro da tag que possui a classe memory */
+/* font-size: tamanho da fonte */
+.memory small {
+  color: #bebebf;
+
+  /* 12px = 12/16 = 0.75 , ou seja, quando utilizo o root como pré definição, todo o restante das font-size devem ser calculadas e ajustadas para se encaixarem em forma de porcentagem do tamanho especificado no root, que no caso foi 16px e rem e o rem puxa essa referência */
+  font-size: 0.75rem;
+}
+
+.memory h1 {
+  /* 32px = 32/16 = 2rem */
+  font-size: 2rem;
+  color: #eaeaea;
+}
+
+/* width: largura */
+/* height: altura */
+/* object-fit: matem a proporcionalidade da imagem */
+/* border-radius: da arredondamento paras bordas */
+.memory img {
+  width: 100%;
+  height: 280px;
+  object-fit: cover;
+  border-radius: 8px;
+  transition: transform 0.3s ease-in-out;
+}
+
+.memory div {
+  width: 100%;
+  height: 280px;
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+.memory:hover img {
+  transform: scale(1.1);
+}
+
+/* line-height: espaçamento vertical de uma linha pra outra */
+.memory p {
+  /* 18px = 18/16 = 1.2rem */
+  font-size: 1.2rem;
+  color: #bebebf;
+  line-height: 28px;
+}
+
+aside {
+  grid-area: profile;
+  /* display: flex : torna o lide aside em um display flexível */
+  display: flex;
+  /* flex-direction: column : define que os espaços devem ser divididos em colunas */
+  flex-direction: column;
+  /* align-items: center : centraliza os elementos do bloco */
+  align-items: center;
+  /* justify-content: center : centraliza os elementos do bloco na vertical */
+  justify-content: center;
+  gap: 20px;
+  /* border-right: 1px solid : cria uma borda do lado direito */
+  border-right: 1px solid;
+  /* border-image: linear-gradient(cor1, cor2) 1 : da diferentes cores pra borda de forma de gradiente */
+  border-image: linear-gradient(#727275, #2c2c31) 1;
+  /* background-image: url : coloca uma imagem de fundo apenas no lado aside */
+  background-image: url(./3aula_assets/background.svg);
+  /* background-position: top right : define a posição da imagem de fundo justificada na parte superior e direita da tela */
+  background-position: top right;
+  /* background-repeat: no-repeat : define que não deve haver repetições da imagem de fundo */
+  background-repeat: no-repeat;
+  /* background-size: auto 100% : ajusta o bloco em relação a 100% da tela */
+  background-size: auto 100%;
+}
+
+/* aside * : mexe com todos os elementos dentro do aside */
+aside * {
+  animation: entering 0.7s ease-in-out;
+}
+
+/* aside img:nth-child(2) : define que toda estilização será feita apenas na segunda imagem que há dentro de aside */
+aside img:nth-child(2) {
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  border: 4px solid transparent;
+  background: linear-gradient(#d39e33, #ed5636, #633bbc) padding-box, linear-gradient(260deg,#d39e33, #ed5636, #633bbc) border-box;
+}
+
+aside p {
+  /* 32px = 32/16 = 2rem */
+  font-size: 2rem;
+  text-align: center;
+}
+
+aside span {
+  /* 12px = 12/16 = 0.75rem */
+  font-size: 0.75rem;
+  color: #9e9ea0;
+}
+
+/* quando o site estiver em uma tela de até 768px, ou seja, menor ou igual a 768px, ele vai se comportar de determinada forma. */
+/* Isso que significa tornar a tela "responsiva", a tela se adequa ao tamanho da tela do objeto, celular, tablet, notebook que a estiver visualizando*/
+@media (max-width: 768px){
+  /* quando a tela for de determinado tamanho, o root se modifica em conjunto */ 
+  :root {
+    font-size: 14px;
+  }
+
+  body {
+    grid-template-columns: 1fr;
+    grid-template-rows: 0.2fr 0.8fr;
+    grid-template-areas: 
+    "profile"
+    "timeline";
+  }
+
+  aside {
+    border-right: none;
+    padding: 32px 12 px;
+  }
+  
+  nav {
+    overflow-y: visible;
+    padding: 22px;
+  }
+
+}
